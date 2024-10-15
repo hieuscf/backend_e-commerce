@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    username: { type: String, unique: true, required: true },
+    fullname: { type: String, unique: true, required: true },
     password: { type: String, required: true },
-    age: { type: Number, required: true }, // Sửa lại required
+    age: { type: Number}, // Sửa lại required
     phone: { type: String }, // Sửa 'string' thành 'String'
     birthDate: { type: String },
-    sex: { type: String, enum: ["male", "female"], required: true },
+    sex: { type: String, enum: ["male", "female"],default: "male" },
     thumbnail: { type: String },
     email: { type: String, unique: true, required: true },
     role: {
@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema(
       default: "customer",
     },
     address: {
-      street: { type: String, required: true },
-      city: { type: String, required: true },
+      street: { type: String },
+      city: { type: String },
       zipCode: { type: String },
-      country: { type: String, required: true },
+      country: { type: String},
     },
     bank: {
       cardExpire: { type: String },
@@ -28,13 +28,11 @@ const userSchema = new mongoose.Schema(
       cardType: {
         type: String,
         enum: ["Credit card", "Debit card", "Prepaid card", "Virtual card"],
-        required: true,
         default: "Credit card",
       },
       currency: {
         type: String,
         enum: ["USD", "VND", "EUR", "JPY"],
-        required: true,
         default: "USD",
       },
       iban: { type: String },
@@ -43,7 +41,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Export models
-const User = mongoose.model("User", userSchema);
-
+// Tạo model cho schema 'food', nếu model đã tồn tại thì dùng model hiện tại, nếu không thì tạo mới
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;

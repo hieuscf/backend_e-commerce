@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import authRoutes from "./routes/client/auth.route.js";
+import { connectDB } from "./config/MongoDB.js";
 
 dotenv.config();
 
@@ -10,9 +12,13 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("API is running");
-});
+//connect monggosee
+connectDB();
+
+//auth
+app.use("/api/auth", authRoutes);
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);

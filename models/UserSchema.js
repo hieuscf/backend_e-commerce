@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema(
     sex: { type: String, enum: ["male", "female"],default: "male" },
     thumbnail: { type: String },
     email: { type: String, unique: true, required: true },
+    status: { type: String, default: "active"},
+    deleted:{type:Boolean, default: false},
     role: {
       type: String,
       enum: ["customer", "seller"],

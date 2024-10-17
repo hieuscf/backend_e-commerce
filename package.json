@@ -21,6 +21,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.18.1",
     "gitignore": "^0.7.0",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "md5": "^2.3.0",
     "mongodb": "^6.9.0",
